@@ -1,6 +1,9 @@
 # singapore-hansard-nlp
 Singapore Hansard NLP
 
+Note that 28 JSON files in the 12th session from 2011-10-10 to 2012-08-13 are excluded
+as they use an old format that is difficult to parse.
+
 ## Sentiment Analysis
 
 Models were evaluated on Singapore Hansard Sentiment Dataset validation set.
@@ -18,6 +21,8 @@ Models were evaluated on Singapore Hansard Sentiment Dataset validation set.
 ```
 python test_sentiment.py input.json models/xlm-roberta-base-sst-2-sh-sentiment
 ```
+
+[singapore-hansard-sentiment-final.zip](https://drive.google.com/file/d/14yZRPLvQ7usliO1WOdFKmqoWgtJjax0C/view?usp=sharing)
 
 ### Raw Results
 

@@ -20,6 +20,8 @@ training and valiation sets.
 Due to the class inbalance, oversampling was performed on the training
 set, resulting in 710 instances in total.
 
+[xlm-roberta-base-sst-2-sh-sentiment.tar.xz](https://drive.google.com/file/d/1toqvkwWjXuHH0EIHHjJv9V9x5FZ-0Pba/view?usp=sharing)
+
 ## xlm-roberta-base-sh-sentiment
 
 XLM-RoBERTa Base model finetuned on Singapore Hansard Sentiment for 10 epochs.
