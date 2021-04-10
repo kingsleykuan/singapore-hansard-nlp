@@ -22,22 +22,22 @@ def create_arg_parser():
     parser.add_argument('--logging_dir', default='logs', type=str,
         help='Directory to output TensorBoard logs.')
 
-    parser.add_argument('--logging_steps', default=50, type=int,
+    parser.add_argument('--logging_steps', default=10, type=int,
         help='Number of steps between logging.')
 
-    parser.add_argument('--batch_size', default=8, type=int,
+    parser.add_argument('--batch_size', default=4, type=int,
         help='Batch size during training and evaluation.')
 
-    parser.add_argument('--gradient_accumulation_steps', default=4, type=int,
+    parser.add_argument('--gradient_accumulation_steps', default=8, type=int,
         help='Number of steps to accumulate gradients for. Effectively scales batch size.')
 
     parser.add_argument('--learning_rate', default=1e-5, type=float,
         help='Learning rate to start at after warmup.')
 
-    parser.add_argument('--num_train_epochs', default=100.0, type=float,
+    parser.add_argument('--num_train_epochs', default=10.0, type=float,
         help='Number of epochs to train for.')
 
-    parser.add_argument('--warmup_ratio', default=1.0/100.0, type=float,
+    parser.add_argument('--warmup_ratio', default=1.0/10.0, type=float,
         help='Ratio of training to warmup, linearly increases learning rate from 0 to starting.')
 
     return parser
