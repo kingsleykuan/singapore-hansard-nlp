@@ -31,7 +31,7 @@ Learning Rate: 7e-6
 Epoch: 10
 
 Accuracy: 0.856
-F1: 0.888
+F1: 0.889
 Precision: 0.894
 Recall: 0.884
 ```
