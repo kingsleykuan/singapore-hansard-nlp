@@ -1,17 +1,19 @@
 import argparse
 
-from datasets import load_dataset
-from handeset_dataset import create_handeset_dataset
+from sh_sentiment_dataset import create_sh_sentiment_dataset
 from sklearn import metrics
 from transformers import (Trainer, TrainingArguments,
     XLMRobertaForSequenceClassification, XLMRobertaTokenizerFast)
 
 def create_arg_parser():
     parser = argparse.ArgumentParser(
-        description='Train XLM-RoBERTa model on HanDeSeT for sentiment classification.')
+        description='Train XLM-RoBERTa model on Singapore Hansard for sentiment classification.')
 
-    parser.add_argument('--handeset_csv_path', default='HanDeSeT.csv', type=str,
-        help='Path to HanDeSeT CSV file.')
+    parser.add_argument('--train_json_path', default='sh_sentiment_train.json', type=str,
+        help='Path to Singapore Hansard Sentiment training JSON file.')
+
+    parser.add_argument('--val_json_path', default='sh_sentiment_val.json', type=str,
+        help='Path to Singapore Hansard Sentiment validation JSON file.')
 
     parser.add_argument('--model_name_or_dir', default='model', type=str,
         help='Name or directory of model to finetune.')
@@ -22,13 +24,13 @@ def create_arg_parser():
     parser.add_argument('--logging_dir', default='logs', type=str,
         help='Directory to output TensorBoard logs.')
 
-    parser.add_argument('--logging_steps', default=10, type=int,
+    parser.add_argument('--logging_steps', default=5, type=int,
         help='Number of steps between logging.')
 
-    parser.add_argument('--batch_size', default=4, type=int,
+    parser.add_argument('--batch_size', default=16, type=int,
         help='Batch size during training and evaluation.')
 
-    parser.add_argument('--gradient_accumulation_steps', default=8, type=int,
+    parser.add_argument('--gradient_accumulation_steps', default=2, type=int,
         help='Number of steps to accumulate gradients for. Effectively scales batch size.')
 
     parser.add_argument('--learning_rate', default=1e-5, type=float,
@@ -43,7 +45,8 @@ def create_arg_parser():
     return parser
 
 def main(
-        handeset_csv_path,
+        train_json_path,
+        val_json_path,
         model_name_or_dir,
         output_dir,
         logging_dir,
@@ -56,8 +59,8 @@ def main(
     tokenizer = XLMRobertaTokenizerFast.from_pretrained(model_name_or_dir)
     model = XLMRobertaForSequenceClassification.from_pretrained(model_name_or_dir)
 
-    handeset_train_dataset, handeset_val_dataset = create_handeset_dataset(
-        handeset_csv_path, tokenizer, test_size=0.2)
+    sh_sentiment_train_dataset, sh_sentiment_val_dataset = create_sh_sentiment_dataset(
+        train_json_path, val_json_path, tokenizer)
 
     training_args = TrainingArguments(
         output_dir=output_dir,
@@ -80,8 +83,8 @@ def main(
     trainer = Trainer(
         model=model,
         args=training_args,
-        train_dataset=handeset_train_dataset,
-        eval_dataset=handeset_val_dataset,
+        train_dataset=sh_sentiment_train_dataset,
+        eval_dataset=sh_sentiment_val_dataset,
         tokenizer=tokenizer,
         compute_metrics=compute_metrics,
     )
@@ -104,7 +107,8 @@ if __name__ == '__main__':
     parser = create_arg_parser()
     args = parser.parse_args()
     main(
-        args.handeset_csv_path,
+        args.train_json_path,
+        args.val_json_path,
         args.model_name_or_dir,
         args.output_dir,
         args.logging_dir,

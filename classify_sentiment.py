@@ -18,7 +18,7 @@ def create_arg_parser():
         help='Path of directroy to write JSON files to.')
 
     parser.add_argument('model_name_or_dir', type=str,
-        help='Name or directory of model to finetune.')
+        help='Name or directory of model.')
 
     return parser
 

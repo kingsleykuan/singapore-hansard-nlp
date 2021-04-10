@@ -10,48 +10,44 @@ Run `python train.py -h` for list of arguments.
 ## xlm-roberta-base-sst-2-handeset
 
 XLM-RoBERTa Base model first finetuned on GLUE SST-2, then further finetuned
-on HanDeSeT for 100 epochs.
-Hyperparameter search was done for learning rate in {7e-6, 1e-5, 2e-5, 3e-5}.
+on HanDeSeT for 10 epochs.
+Hyperparameter search was done for learning rate in {7e-6, 1e-5, 3e-5}.
 Model was evaluated on the dev set after each epoch. Best performing model:
 
 ```
 Learning Rate: 3e-5
-Epoch: 38
+Epoch: 10
 
-Accuracy: 0.713
-F1: 0.735
-Precision: 0.739
-Recall: 0.731
+Accuracy: 0.706
+F1: 0.746
+Precision: 0.702
+Recall: 0.796
 ```
-
-https://drive.google.com/file/d/17m6rMWl4Fge-svjJgngS8blltdcMx1Tj/view?usp=sharing
 
 Training command:
 
 ```
-python train.py --handeset_csv_path=HanDeSeT.csv --model_name_or_dir=xlm-roberta-base-sst-2 --output_dir=outputs --logging_dir=logs --batch_size=8 --gradient_accumulation_steps=4  --learning_rate=3e-5
+python train.py --handeset_csv_path=HanDeSeT.csv --model_name_or_dir=xlm-roberta-base-sst-2 --output_dir=outputs --logging_dir=logs --batch_size=4 --gradient_accumulation_steps=8  --learning_rate=3e-5
 ```
 
 ## xlm-roberta-base-handeset
 
-XLM-RoBERTa Base model finetuned on HanDeSeT for 100 epochs.
-Hyperparameter search was done for learning rate in {7e-6, 1e-5, 2e-5, 3e-5}.
+XLM-RoBERTa Base model finetuned on HanDeSeT for 10 epochs.
+Hyperparameter search was done for learning rate in {7e-6, 1e-5, 3e-5}.
 Model was evaluated on the dev set after each epoch. Best performing model:
 
 ```
 Learning Rate: 3e-5
-Epoch: 27
+Epoch: 6
 
-Accuracy: 0.734
-F1: 0.768
-Precision: 0.730
-Recall: 0.810
+Accuracy: 0.691
+F1: 0.730
+Precision: 0.695
+Recall: 0.769
 ```
-
-https://drive.google.com/file/d/1fWBOztniQJwaw04Aj2cS5Hzo-Gis5lG0/view?usp=sharing
 
 Training command:
 
 ```
-python train.py --handeset_csv_path=HanDeSeT.csv --model_name_or_dir=xlm-roberta-base --output_dir=outputs --logging_dir=logs --batch_size=8 --gradient_accumulation_steps=4  --learning_rate=3e-5
+python train.py --handeset_csv_path=HanDeSeT.csv --model_name_or_dir=xlm-roberta-base --output_dir=outputs --logging_dir=logs --batch_size=4 --gradient_accumulation_steps=8  --learning_rate=3e-5
 ```
