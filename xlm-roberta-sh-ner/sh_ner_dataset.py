@@ -76,7 +76,7 @@ def create_sh_ner_dataset(train_json_path, val_json_path, tokenizer):
     return sh_ner_train_dataset, sh_ner_val_dataset
 
 class SingaporeHansardNerDataset(Dataset):
-    def __init__(self, sentences, sentences_entities, tokenizer):
+    def __init__(self, sentences, sentences_entities, tokenizer, trainer=True):
         self.sentences = sentences
         self.sentences_entities = sentences_entities
 
@@ -117,8 +117,10 @@ class SingaporeHansardNerDataset(Dataset):
                 else:
                     sentence_labels[i] = 'MASK'
 
-            del sentence_encodings['special_tokens_mask']
-            del sentence_encodings['offset_mapping']
+            if trainer:
+                del sentence_encodings['special_tokens_mask']
+                del sentence_encodings['offset_mapping']
+
             sentence_labels = [self.label2id[label] for label in sentence_labels]
 
             encodings.append(sentence_encodings)
