@@ -1,6 +1,8 @@
 # singapore-hansard-nlp
 Singapore Hansard NLP
 
+[singapore-hansard-sentiment-ner-final.zip](https://drive.google.com/file/d/1xWDplG7ythfnv3EZjxhjEmtUHwS9st-E/view?usp=sharing)
+
 Note that 28 JSON files in the 12th session from 2011-10-10 to 2012-08-13 are excluded
 as they use an old format that is difficult to parse.
 
@@ -23,8 +25,6 @@ python test_sentiment.py input.json models/xlm-roberta-base-sst-2-sh-sentiment
 ```
 
 [xlm-roberta-base-sst-2-sh-sentiment.tar.xz](https://drive.google.com/file/d/1toqvkwWjXuHH0EIHHjJv9V9x5FZ-0Pba/view?usp=sharing)
-
-[singapore-hansard-sentiment-final.zip](https://drive.google.com/file/d/14yZRPLvQ7usliO1WOdFKmqoWgtJjax0C/view?usp=sharing)
 
 ### Raw Results
 
